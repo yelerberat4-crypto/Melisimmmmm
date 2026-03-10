@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melis için sürpriz 💖</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ff9ecf,#ff4da6);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9ecf,#ff4da6);
+z-index:10;
+}
+
+button{
+padding:15px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:white;
+color:#ff4da6;
+margin-top:20px;
+}
+
+.container{
+display:none;
+padding:25px;
+}
+
+#celebration{
+font-size:42px;
+display:none;
+animation:zoom 1.5s infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1)}
+to{transform:scale(1.2)}
+}
+
+#credit{
+font-size:16px;
+margin-top:10px;
+opacity:0.9;
+}
+
+.gallery img{
+width:150px;
+border-radius:12px;
+margin:5px;
+}
+
+.story{
+margin-top:25px;
+font-size:18px;
+}
+
+.heart{
+position:fixed;
+top:-10px;
+animation:fall 5s linear infinite;
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10px);}
+100%{transform:translateY(110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+
+<h1>💌 Melis için özel sürpriz</h1>
+
+<p>Berat sana bir şey hazırladı...</p>
+
+<button onclick="openSite()">Sürprizi Aç 🎁</button>
+
+</div>
+
+<div class="container" id="site">
+
+<h1>🎂 Melis 🎂</h1>
+
+<div id="celebration">🎉 MELİS 18 OLDU 🎉</div>
+
+<div id="credit">❤️ Bu site Melis için Berat tarafından hazırlandı</div>
+
+<p id="text"></p>
+
+<button onclick="surprise()">🎁 Sürpriz Mesaj</button>
+
+<div id="surprise" style="display:none;font-size:22px;margin-top:15px;">
+Hayatıma gelen en güzel şey sensin. Seni çok seviyorum 💖
+</div>
+
+<br><br>
+
+<div class="gallery">
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+</div>
+
+<br>
+
+<div class="story">
+<h3>📖 Bizim Hikayemiz</h3>
+<p>
+Seninle tanıştığım gün hayatım değişti.  
+Beraber güldük, eğlendik ve nice güzel anılar biriktirdik.  
+Bugün 18 yaşına giriyorsun ve ben hayatımda olduğun için çok şanslıyım.  
+İyi ki doğdun Melis ❤️
+</p>
+</div>
+
+<br>
+
+<audio id="music" controls loop>
+<source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+
+function openSite(){
+document.getElementById("intro").style.display="none"
+document.getElementById("site").style.display="block"
+document.getElementById("music").play()
+}
+
+/* yazı animasyonu */
+
+let message="Melis... hayatıma gelen en güzel şey sensin. 18 yaşın sana mutluluk getirsin. Seni çok seviyorum ❤️"
+let i=0
+
+function type(){
+
+if(i<message.length){
+document.getElementById("text").innerHTML+=message.charAt(i)
+i++
+setTimeout(type,50)
+}
+
+}
+
+type()
+
+function surprise(){
+document.getElementById("surprise").style.display="block"
+}
+
+/* kalpler */
+
+setInterval(()=>{
+
+let heart=document.createElement("div")
+
+heart.classList.add("heart")
+heart.innerHTML="💗"
+heart.style.left=Math.random()*100+"vw"
+heart.style.fontSize=(Math.random()*20+20)+"px"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{heart.remove()},5000)
+
+},300)
+
+/* konfeti */
+
+setInterval(()=>{
+
+let confetti=document.createElement("div")
+
+confetti.classList.add("confetti")
+confetti.style.left=Math.random()*100+"vw"
+confetti.style.background="hsl("+Math.random()*360+"deg,100%,50%)"
+
+document.body.appendChild(confetti)
+
+setTimeout(()=>{confetti.remove()},3000)
+
+},200)
+
+/* dokununca kalp patlaması */
+
+document.addEventListener("click",function(e){
+
+for(let i=0;i<10;i++){
+
+let heart=document.createElement("div")
+
+heart.innerHTML="💖"
+heart.style.position="fixed"
+heart.style.left=e.clientX+"px"
+heart.style.top=e.clientY+"px"
+heart.style.fontSize="25px"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{heart.remove()},2000)
+
+}
+
+})
+
+/* 00:00 kutlama */
+
+let target=new Date("Jun 15, 2026 00:00:00").getTime()
+
+setInterval(()=>{
+
+let now=new Date().getTime()
+
+if(now>target){
+
+document.getElementById("celebration").style.display="block"
+
+}
+
+},1000)
+
+</script>
+
+</body>
+</html>
